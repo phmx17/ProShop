@@ -11,6 +11,8 @@ const router = express.Router()
 
 router.get('/', asyncHandler(async (req, res) => {
   const products = await Product.find({})
+  // res.status(401)
+  // throw new Error('Not Authorized')  // this example would show error in component
   res.json(products)
 }))
 
