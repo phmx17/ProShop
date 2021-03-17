@@ -11,8 +11,8 @@ const router = express.Router()
 
 router.get('/', asyncHandler(async (req, res) => {
   const products = await Product.find({})
-  res.status(401)
-  throw new Error('Not Authorized')  // this example would show error in component
+  // res.status(401)
+  // throw new Error('Not Authorized')  // this example would show error in component
   res.json(products)
 }))
 
@@ -21,6 +21,8 @@ router.get('/', asyncHandler(async (req, res) => {
 // @access Public
 router.get('/:id', asyncHandler(async(req, res) => {
   const product = await Product.findById(req.params.id)
+  // res.status(401)
+  // throw new Error('Not Authorized')  // this example would show error in component
   if (product) {
     res.json(product)
   } else {
