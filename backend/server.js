@@ -4,11 +4,14 @@ import colors from 'colors'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
 connectDB()
 
 const app = express()
+
+app.use(express.json())
 
 // example middleware; will run with any request
 // app.use((req, res, next) => {
@@ -21,6 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/products', productRoutes)
+app.use('/api/users', userRoutes)
 // apply custom middleware
 app.use (notFound)
 app.use (errorHandler)
