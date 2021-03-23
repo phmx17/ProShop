@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { logout } from '../actions/userActions';
 
 const Header = () => {
   const userLogin = useSelector(state => state.userLogin)
@@ -9,7 +10,7 @@ const Header = () => {
   const dispatch = useDispatch()
 
   const logoutHandler = () => {
-    console.log('logout handler');
+    dispatch(logout())  // do not FORGET parens () !!!
   }
 
   return (
