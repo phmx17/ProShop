@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'  // in order to use with chrome redux tool
 import { productListReducer, productDetailsReducer } from './reducers/productReducer'
 import { cartReducer } from './reducers/cartReducer'
-import { 
+import {  
   userLoginReducer, 
   userRegisterReducer, 
   userDetailsReducer,
@@ -18,12 +18,15 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer
 })
-// get local storage data if available
+// get local storage data if available; otherwise empty [], null or {}
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse (localStorage.getItem('cartItems')) : []
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse (localStorage.getItem('userInfo')) : null
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSON.parse (localStorage.getItem('shippingAddress')) : {}
 
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage,
+  cart: { 
+    cartItems: cartItemsFromStorage, 
+    shippingAddress: shippingAddressFromStorage
   },
   userLogin: { userInfo: userInfoFromStorage }  
 }
