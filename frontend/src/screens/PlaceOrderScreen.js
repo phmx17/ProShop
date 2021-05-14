@@ -7,14 +7,23 @@ import CheckoutSteps from '../components/CheckoutSteps'
 
 const PlaceOrderScreen = () => {
   const cart = useSelector(state => state.cart);  // collect cart from redux store
+  
+  // function to add zeroes for nicer display of costs
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2)
+  }
+  // calculate cart items price
+  cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))  // start acc at zero
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 10) // free shipping on orders over $100
+  cart.taxPrice = addDecimals(Number((0.0825 * cart.itemsPrice).toFixed(2))) // must generate a Number type otherwise it's a string
+  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2);
 
   // placeOrder helper
   const placeOrderHandler = () => {
-    console.log(' ordered ...');
   }
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <CheckoutSteps step1 step2 step3 step4 /> 
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
